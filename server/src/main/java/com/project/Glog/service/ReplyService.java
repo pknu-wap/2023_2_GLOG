@@ -39,15 +39,24 @@ public class ReplyService  {
 
         replyRepository.save(reply);
 
-        Alarm alarm = new Alarm(
-                null,
-                post.getUser(),
-                "게시글에 댓글이 달렸습니다.",
-                false,
-                AlarmType.reply,
-                post.getId(),
-                null);
-        alarmRepository.save(alarm);
+        if(user.getId() != post.getUser().getId()){
+            String ShortPostTitle = post.getTitle();
+            if(post.getTitle().length() > 8){
+                ShortPostTitle = post.getTitle().substring(0, 8) + "...";
+            }
+
+            Alarm alarm = new Alarm(
+                    null,
+                    post.getUser(),
+                    post.getId(),
+                    ShortPostTitle + "에 "+ user.getNickname() + "님이 댓글을 추가했습니다.",
+                    false,
+                    AlarmType.reply,
+                    null);
+            alarmRepository.save(alarm);
+        }
+
+
 
         return reply.getPost().getId();
     }

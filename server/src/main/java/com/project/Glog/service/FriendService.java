@@ -1,12 +1,11 @@
 package com.project.Glog.service;
 
-import com.project.Glog.domain.Friend;
-import com.project.Glog.domain.Post;
-import com.project.Glog.domain.User;
+import com.project.Glog.domain.*;
 import com.project.Glog.dto.UserSimpleDto;
 import com.project.Glog.dto.UserSimpleDtos;
 import com.project.Glog.dto.response.user.UserFriendResponse;
 import com.project.Glog.dto.response.user.UserModalResponse;
+import com.project.Glog.repository.AlarmRepository;
 import com.project.Glog.repository.FriendRepository;
 import com.project.Glog.repository.PostRepository;
 import com.project.Glog.repository.UserRepository;
@@ -15,17 +14,18 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class FriendService {
-    @Autowired
-    private FriendRepository friendRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PostRepository postRepository;
+    private final FriendRepository friendRepository;
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final AlarmRepository alarmRepository;
 
     public UserModalResponse makeUserModalResponse(UserPrincipal userPrincipal, Long personId) {
         User opponent = userRepository.findById(personId).get();
@@ -177,13 +177,23 @@ public class FriendService {
 
     public void addFriend(UserPrincipal userPrincipal, Long personId) {
         if (findRelationship(userPrincipal, personId).equals("other")) {
-            saveFriendInUser(userPrincipal, personId, makeAndSaveFriendEntity(userPrincipal.getId(), personId));
+            User user = userRepository.findById(userPrincipal.getId()).get();
+            User opponent = userRepository.findById(personId).get();
+            saveFriendInUser(user, opponent, makeAndSaveFriendEntity(userPrincipal.getId(), personId));
+
+            Alarm alarm = new Alarm(
+                    null,
+                    opponent,
+                    null,
+                     user.getNickname() + "님이 친구 요청을 보냈습니다.",
+                    false,
+                    AlarmType.friend,
+                    null);
+            alarmRepository.save(alarm);
         }
     }
 
-    private void saveFriendInUser(UserPrincipal userPrincipal, Long personId, Friend friend) {
-        User user = userRepository.findById(userPrincipal.getId()).get();
-        User opponent = userRepository.findById(personId).get();
+    private void saveFriendInUser(User user, User opponent, Friend friend) {
         user.getToFriends().add(friend);
         opponent.getFromFriends().add(friend);
     }

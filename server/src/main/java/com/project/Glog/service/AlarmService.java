@@ -5,17 +5,17 @@ import com.project.Glog.domain.User;
 import com.project.Glog.dto.AlarmDtos;
 import com.project.Glog.repository.AlarmRepository;
 import com.project.Glog.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class AlarmService {
-    @Autowired
-    private AlarmRepository alarmRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final AlarmRepository alarmRepository;
+    private final UserRepository userRepository;
     public AlarmDtos getAlarms(Long id) {
         User user = userRepository.findById(id).get();
         List<Alarm> alarms = alarmRepository.findAllByUser(user);
