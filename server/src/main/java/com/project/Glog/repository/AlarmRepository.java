@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface AlarmRepository extends JpaRepository<Alarm, Long> {
-    List<Alarm> findAllByUser(User user);
+    List<Alarm> findAllByUserOrderByCreatedAtDesc(User user);
 
 }

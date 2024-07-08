@@ -18,7 +18,7 @@ public class AlarmService {
     private final UserRepository userRepository;
     public AlarmDtos getAlarms(Long id) {
         User user = userRepository.findById(id).get();
-        List<Alarm> alarms = alarmRepository.findAllByUser(user);
+        List<Alarm> alarms = alarmRepository.findAllByUserOrderByCreatedAtDesc(user);
 
         if(alarms.size()>20){
             List<Alarm> drop = alarms.subList(0, alarms.size()-20);
