@@ -78,7 +78,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setImageUrl("https://glog-image-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/profile.png");
 
         if (registrationId.equalsIgnoreCase(AuthProvider.github.toString())) {
-            user.setGithubID(oAuth2UserInfo.getName());git 
+            user.setGithubID(oAuth2UserInfo.getName());
             user.setGithubToken(token);
         }
 
