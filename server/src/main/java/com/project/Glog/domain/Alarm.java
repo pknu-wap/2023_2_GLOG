@@ -21,11 +21,11 @@ public class Alarm {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+    private Long postId;
     private String message;
     private Boolean checked;
     @Enumerated(EnumType.STRING)
     private AlarmType type;
-    private Long referencedId;
     @CreatedDate
     private LocalDateTime createdAt;
 
