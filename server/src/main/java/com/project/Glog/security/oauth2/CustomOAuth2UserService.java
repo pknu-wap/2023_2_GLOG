@@ -7,7 +7,6 @@ import com.project.Glog.repository.UserRepository;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.security.oauth2.user.OAuth2UserInfo;
 import com.project.Glog.security.oauth2.user.OAuth2UserInfoFactory;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -19,14 +18,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Optional;
+
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
-    private final UserRepository userRepository;
+
+    @Autowired
+    private UserRepository userRepository;
     private String token;
 
-    CustomOAuth2UserService(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
 
     //백엔드 리다이렉션 페이지에서 토큰을 받은 후 리소스에 다시 요청해서 유저 정보를 받아옴
     @Override
