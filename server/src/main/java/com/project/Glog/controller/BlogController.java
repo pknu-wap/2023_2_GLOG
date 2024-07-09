@@ -9,19 +9,18 @@ import com.project.Glog.repository.BlogRepository;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.BlogService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+@AllArgsConstructor
 @RestController
 public class BlogController {
-    @Autowired
-    private BlogService blogService;
-    @Autowired
-    private BlogRepository blogRepository;
+    private final BlogService blogService;
+    private final BlogRepository blogRepository;
 
     @GetMapping("/mypage")
     public ResponseEntity<MyPageResponse> goToMypage(@CurrentUser UserPrincipal userPrincipal){

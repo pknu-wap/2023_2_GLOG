@@ -10,17 +10,15 @@ import com.project.Glog.repository.BlogRepository;
 import com.project.Glog.repository.GuestbookRepository;
 import com.project.Glog.repository.UserRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+@AllArgsConstructor
 @Service
 public class BlogService {
-    @Autowired
-    private BlogRepository blogRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private GuestbookRepository guestbookRepository;
+    private final BlogRepository blogRepository;
+    private final UserRepository userRepository;
+    private final GuestbookRepository guestbookRepository;
     public MyPageResponse getMypage(Long uid){
         return MyPageResponse.of(blogRepository.findByUserId(uid).get());
     }

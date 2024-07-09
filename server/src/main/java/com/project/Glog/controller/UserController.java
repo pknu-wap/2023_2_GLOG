@@ -6,6 +6,7 @@ import com.project.Glog.dto.response.user.UserMypageResponse;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.CustomUserDetailsService;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,12 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
+@AllArgsConstructor
 @RestController
 public class UserController {
-
-    @Autowired
-    private CustomUserDetailsService userService;
+    private final CustomUserDetailsService userService;
 
 //    @GetMapping("/user/me")
 //    @PreAuthorize("hasRole('USER')")

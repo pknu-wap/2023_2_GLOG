@@ -4,16 +4,15 @@ import com.project.Glog.dto.PostPreviewDtos;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.ScrapService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@AllArgsConstructor
 @RestController
 public class ScrapController {
-
-    @Autowired
-    private ScrapService scrapService;
+    private final ScrapService scrapService;
 
     @GetMapping("/scrap")
     public ResponseEntity<PostPreviewDtos> getScraps(@CurrentUser UserPrincipal userPrincipal,

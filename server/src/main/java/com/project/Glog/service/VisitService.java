@@ -6,20 +6,18 @@ import com.project.Glog.repository.UserRepository;
 import com.project.Glog.repository.VisitRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-
+@AllArgsConstructor
 @Service
 public class VisitService {
     private final String VISIT_COOKIE_NAME = "visit_Count";
-    @Autowired
-    VisitRepository visitRepository;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    BlogRepository blogRepository;
+    private final VisitRepository visitRepository;
+    private final UserRepository userRepository;
+    private final BlogRepository blogRepository;
 
     public int getVisitCount(Long userId) {
         Long blogId = blogRepository.findByUserId(userId).get().getId();

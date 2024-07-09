@@ -5,19 +5,18 @@ import com.project.Glog.dto.PathDto;
 import com.project.Glog.repository.BlogRepository;
 import com.project.Glog.repository.PathRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
+@AllArgsConstructor
 @Service
 public class PathService {
-    @Autowired
-    private PathRepository pathRepository;
-    @Autowired
-    private BlogRepository blogRepository;
+    private final PathRepository pathRepository;
+    private final BlogRepository blogRepository;
 
     public List<PathDto> makePathDtos(UserPrincipal userPrincipal) {
         List<PathDto> pathDtos = new ArrayList<>();

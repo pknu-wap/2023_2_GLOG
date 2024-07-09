@@ -8,20 +8,17 @@ import com.project.Glog.dto.response.pr.PrPostedDtos;
 import com.project.Glog.repository.CategoryRepository;
 import com.project.Glog.repository.PrPostRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-
+@AllArgsConstructor
 @Service
 public class PrPostService {
-
-    @Autowired
-    private PrPostRepository prPostResponse;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final PrPostRepository prPostResponse;
+    private final CategoryRepository categoryRepository;
 
     public PrPostResponse readPrPosted(UserPrincipal userPrincipal, Long categoryId) {
         List <PrPost> prPost = prPostResponse.findAllBycategoryId(categoryId);

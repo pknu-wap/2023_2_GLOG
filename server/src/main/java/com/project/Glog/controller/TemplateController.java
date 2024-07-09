@@ -5,6 +5,7 @@ import com.project.Glog.dto.response.post.PostTitleResponse;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.TemplateService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,11 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
+@AllArgsConstructor
 @RestController
 public class TemplateController {
-    @Autowired
-    private TemplateService templateService;
+    private final TemplateService templateService;
 
     @GetMapping("/template")
     public ResponseEntity<PostTitleResponse> readTemplate(@CurrentUser UserPrincipal userPrincipal) {

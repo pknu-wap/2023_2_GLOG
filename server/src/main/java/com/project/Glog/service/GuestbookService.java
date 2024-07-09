@@ -13,21 +13,18 @@ import com.project.Glog.repository.BookMessageRepository;
 import com.project.Glog.repository.GuestbookRepository;
 import com.project.Glog.repository.UserRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@AllArgsConstructor
 @Service
 public class GuestbookService {
-    @Autowired
-    private GuestbookRepository guestbookRepository;
-    @Autowired
-    private BookMessageRepository bookMessageRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private BlogRepository blogRepository;
+    private final GuestbookRepository guestbookRepository;
+    private final BookMessageRepository bookMessageRepository;
+    private final UserRepository userRepository;
+    private final BlogRepository blogRepository;
 
 
     public void save(UserPrincipal userPrincipal, GuestbookMessageRequest req) {

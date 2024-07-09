@@ -5,6 +5,7 @@ import com.project.Glog.dto.response.post.PostTitleResponse;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.TemporaryService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,11 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
+@AllArgsConstructor
 @RestController
 public class TemporaryController {
-    @Autowired
-    private TemporaryService temporaryService;
+    private final TemporaryService temporaryService;
 
     @GetMapping("/temporaries")
     public ResponseEntity<PostTitleResponse> readTemporary(@CurrentUser UserPrincipal userPrincipal){

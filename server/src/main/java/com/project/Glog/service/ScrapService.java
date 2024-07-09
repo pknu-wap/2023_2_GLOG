@@ -8,6 +8,7 @@ import com.project.Glog.repository.PostRepository;
 import com.project.Glog.repository.ScrapRepository;
 import com.project.Glog.repository.UserRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,15 +20,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@AllArgsConstructor
 @Service
 public class ScrapService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PostRepository postRepository;
-    @Autowired
-    private ScrapRepository scrapRepository;
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final ScrapRepository scrapRepository;
 
     public PostPreviewDtos getScrapPosts(UserPrincipal userPrincipal, int page){
         User user = userRepository.findById(userPrincipal.getId()).get();

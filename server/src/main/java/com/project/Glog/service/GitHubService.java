@@ -9,6 +9,7 @@ import com.project.Glog.repository.CategoryRepository;
 import com.project.Glog.repository.GithubRepoRepository;
 import com.project.Glog.repository.PrPostRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -17,22 +18,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+@AllArgsConstructor
 @Service
 public class GitHubService {
-    @Autowired
-    private GithubRepoRepository githubRepositoryRepository;
-    @Autowired
-    private PrPostRepository prPostRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final GithubRepoRepository githubRepositoryRepository;
+    private final PrPostRepository prPostRepository;
+    private final CategoryRepository categoryRepository;
 
-    private final RestTemplate restTemplate;
     private static final String GITHUB_API_URL = "https://api.github.com";
 
-    public GitHubService() {
-        this.restTemplate = new RestTemplate();
-    }
 
     public List<GithubRepositoryInfo> getUserRepo(User user) {
         HttpHeaders headers = new HttpHeaders();

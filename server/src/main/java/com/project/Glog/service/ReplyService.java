@@ -8,6 +8,7 @@ import com.project.Glog.dto.request.reply.ReplyUpdateRequest;
 import com.project.Glog.dto.response.reply.ReplyGetResponse;
 import com.project.Glog.repository.*;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,19 +17,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
 @Service
 public class ReplyService  {
-    @Autowired
-    private ReplyRepository replyRepository;
-    @Autowired
-    private ReplyLikeRepository replyLikeRepository;
-    @Autowired
-    private PostRepository postRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private AlarmRepository alarmRepository;
+    private final ReplyRepository replyRepository;
+    private final ReplyLikeRepository replyLikeRepository;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final AlarmRepository alarmRepository;
 
 
     public Long createReply(UserPrincipal userPrincipal, ReplyCreateRequest req) {
