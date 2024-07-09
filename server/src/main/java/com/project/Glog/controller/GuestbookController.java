@@ -5,16 +5,15 @@ import com.project.Glog.dto.response.guestbook.GuestbookResponse;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.GuestbookService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@AllArgsConstructor
 @RestController
 public class GuestbookController {
-
-    @Autowired
-    private GuestbookService guestbookService;
+    private final GuestbookService guestbookService;
 
     @PostMapping("/guestbook")
     ResponseEntity<String> saveMessage(@CurrentUser UserPrincipal userPrincipal, @RequestBody GuestbookMessageRequest req){

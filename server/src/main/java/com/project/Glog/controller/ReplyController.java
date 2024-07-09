@@ -7,16 +7,16 @@ import com.project.Glog.dto.response.reply.ReplyGetResponse;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.ReplyService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@AllArgsConstructor
 @RestController
 public class ReplyController {
-    @Autowired
-    private ReplyService replyService;
+    private final ReplyService replyService;
 
 
     @PostMapping("/replies")

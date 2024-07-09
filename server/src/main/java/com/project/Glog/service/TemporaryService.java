@@ -9,6 +9,7 @@ import com.project.Glog.repository.TemporaryRepository;
 import com.project.Glog.repository.UserRepository;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.util.AwsUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,17 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@AllArgsConstructor
 @Service
 public class TemporaryService {
-    @Autowired
-    private TemporaryRepository temporaryRepository;
-    @Autowired
-    private TemporaryHashtagRepository temporaryHashtagRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private AwsUtils awsUtils;
+    private final TemporaryRepository temporaryRepository;
+    private final TemporaryHashtagRepository temporaryHashtagRepository;
+    private final UserRepository userRepository;
+    private final AwsUtils awsUtils;
 
     public PostTitleResponse readTemporaries(UserPrincipal userPrincipal) {
         List<Temporary> temporaries = temporaryRepository.findByUserId(userPrincipal.getId());

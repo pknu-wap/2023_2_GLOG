@@ -13,20 +13,18 @@ import com.project.Glog.repository.BlogRepository;
 import com.project.Glog.repository.CategoryRepository;
 import com.project.Glog.repository.PostRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@AllArgsConstructor
 @Service
 public class CategoryService {
-    @Autowired
-    private  CategoryRepository categoryRepository;
-    @Autowired
-    private BlogRepository blogRepository;
-    @Autowired
-    private PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
+    private final BlogRepository blogRepository;
+    private final PostRepository postRepository;
 
     public Category create(UserPrincipal userPrincipal, CategoryCreateRequest req){
         Blog blog= blogRepository.findByUserId(userPrincipal.getId()).get();

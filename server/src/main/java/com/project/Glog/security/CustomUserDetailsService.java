@@ -9,6 +9,7 @@ import com.project.Glog.domain.User;
 import com.project.Glog.repository.BlogRepository;
 import com.project.Glog.repository.UserRepository;
 import com.project.Glog.util.AwsUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,18 +23,12 @@ import java.io.IOException;
 /**
  * Created by rajeevkumarsingh on 02/08/17.
  */
-
+@AllArgsConstructor
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private BlogRepository blogRepository;
-
-    @Autowired
-    private AwsUtils awsUtils;
+    private final UserRepository userRepository;
+    private final BlogRepository blogRepository;
+    private final AwsUtils awsUtils;
 
     @Override
     @Transactional

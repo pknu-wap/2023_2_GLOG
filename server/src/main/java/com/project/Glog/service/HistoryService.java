@@ -6,6 +6,7 @@ import com.project.Glog.dto.response.history.Week;
 import com.project.Glog.dto.response.history.Year;
 import com.project.Glog.repository.HistoryRepository;
 import com.project.Glog.security.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
 @Service
 public class HistoryService {
-    @Autowired
-    private HistoryRepository historyRepository;
+    private final HistoryRepository historyRepository;
     public HistoryResponse readHistory(UserPrincipal userPrincipal){
         LocalDate Date = LocalDate.now();
         DayOfWeek Day = Date.getDayOfWeek();

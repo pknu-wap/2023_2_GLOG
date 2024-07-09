@@ -13,6 +13,7 @@ import com.project.Glog.service.PostService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,13 +31,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
+@AllArgsConstructor
 @RestController
 public class PostController {
-    @Autowired
-    private PostService postService;
-    @Autowired
-    private FriendService friendService;
+    private final PostService postService;
+    private final FriendService friendService;
 
 
     @RequestMapping(value = "/post",

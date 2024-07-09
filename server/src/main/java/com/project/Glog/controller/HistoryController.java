@@ -4,6 +4,7 @@ import com.project.Glog.dto.response.history.HistoryResponse;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.HistoryService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
-
+@AllArgsConstructor
 @RestController
 public class HistoryController {
-
-    @Autowired
-    private HistoryService historyService;
+    private final HistoryService historyService;
 
     @GetMapping("/history")
     public ResponseEntity<HistoryResponse> readHistory(@CurrentUser UserPrincipal userPrincipal) throws IOException {

@@ -12,6 +12,7 @@ import com.project.Glog.repository.UserRepository;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.GitHubService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@AllArgsConstructor
 @RestController
 public class GitHubController {
-    @Autowired
-    private GitHubService gitHubService;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private GithubRepoRepository githubRepoRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final GitHubService gitHubService;
+    private final UserRepository userRepository;
+    private final GithubRepoRepository githubRepoRepository;
+    private final CategoryRepository categoryRepository;
 
 
 

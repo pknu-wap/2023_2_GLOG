@@ -10,6 +10,7 @@ import com.project.Glog.repository.TemplateRepository;
 import com.project.Glog.repository.UserRepository;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.util.AwsUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,17 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@AllArgsConstructor
 @Service
 public class TemplateService {
-    @Autowired
-    private TemplateRepository templateRepository;
-    @Autowired
-    private TemplateHashtagRepository templateHashtagRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private AwsUtils awsUtils;
+    private final TemplateRepository templateRepository;
+    private final TemplateHashtagRepository templateHashtagRepository;
+    private final UserRepository userRepository;
+    private final AwsUtils awsUtils;
 
     public PostTitleResponse readTemplates(UserPrincipal userPrincipal) {
         List<Template> templates = templateRepository.findByUserId(userPrincipal.getId());

@@ -5,6 +5,7 @@ import com.project.Glog.dto.response.user.UserModalResponse;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.FriendService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+@AllArgsConstructor
 @RestController
 public class FriendController {
-    @Autowired
-    private FriendService friendService;
+    private final FriendService friendService;
 
     @GetMapping("/introduce")
     public ResponseEntity<UserModalResponse> requestModal(@CurrentUser UserPrincipal userPrincipal,

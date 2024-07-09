@@ -4,6 +4,7 @@ import com.project.Glog.dto.PathDto;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.PathService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@AllArgsConstructor
 @RestController
 public class PathController {
-    @Autowired
-    private PathService pathService;
+    private final PathService pathService;
 
     @GetMapping("/path")
     public ResponseEntity<List<PathDto>> readPath(@CurrentUser UserPrincipal userPrincipal) {

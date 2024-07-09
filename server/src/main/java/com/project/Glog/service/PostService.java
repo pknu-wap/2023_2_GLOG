@@ -25,6 +25,7 @@ import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.util.AwsUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,31 +40,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@AllArgsConstructor
 @Service
 public class PostService {
     private static final String VIEW_COOKIE_NAME = "view_Count";
 
-    @Autowired
-    private PostRepository postRepository;
-    @Autowired
-    private PostLikeRepository postLikeRepository;
-    @Autowired
-    private PostHashtagRepository postHashtagRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private BlogRepository blogRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
-    private ScrapRepository scrapRepository;
-    @Autowired
-    private AwsUtils awsUtils;
-    @Autowired
-    private HistoryRepository historyRepository;
-    @Autowired
-    private PrPostRepository prPostRepository;
+    private final PostRepository postRepository;
+    private final PostLikeRepository postLikeRepository;
+    private final PostHashtagRepository postHashtagRepository;
+    private final UserRepository userRepository;
+    private final BlogRepository blogRepository;
+    private final CategoryRepository categoryRepository;
+    private final ScrapRepository scrapRepository;
+    private final AwsUtils awsUtils;
+    private final HistoryRepository historyRepository;
+    private final PrPostRepository prPostRepository;
 
 
     public Post create(UserPrincipal userPrincipal, MultipartFile multipartFile, PostCreateRequest req) throws IOException {
