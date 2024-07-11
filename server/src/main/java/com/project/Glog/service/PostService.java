@@ -175,7 +175,7 @@ public class PostService {
             if (!oldCookie.getValue().contains("[" + postId + "]")) {
                 oldCookie.setValue(oldCookie.getValue() + "[" + postId + "]");
                 oldCookie.setPath("/");
-                addViewCount(postId);
+//                addViewCount(postId);
             }
             return oldCookie;
         }
