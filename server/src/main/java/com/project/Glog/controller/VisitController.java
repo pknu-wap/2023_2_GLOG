@@ -29,7 +29,7 @@ public class VisitController {
     }
 
     @PostMapping("/visit")
-    @CrossOrigin(origins = "http://15.164.221.35:3000", allowedHeaders = "*")
+    @CrossOrigin(origins = "https://gloog.vercel.app", allowedHeaders = "*")
     public ResponseEntity<String> saveVisitCount(HttpServletRequest request,
                                                  HttpServletResponse response,
                                                  @RequestParam Long blogId) {

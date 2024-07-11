@@ -82,7 +82,7 @@ public class PostController {
     }
 
     @GetMapping("/post")
-    @CrossOrigin(origins = "http://15.164.221.35:3000", allowedHeaders = "*")
+    @CrossOrigin(origins = "https://gloog.vercel.app", allowedHeaders = "*")
     public ResponseEntity<?> readPost(HttpServletRequest httpServletRequest,
                                       HttpServletResponse httpServletResponse,
                                       @CurrentUser UserPrincipal userPrincipal,

@@ -182,6 +182,8 @@ public class PostService {
 
         Cookie newCookie = new Cookie(VIEW_COOKIE_NAME, "[" + postId + "]");
         newCookie.setPath("/");
+        newCookie.setMaxAge(60 * 60 * 24);
+        newCookie.setSecure(true);
         addViewCount(postId);
         return newCookie;
     }
