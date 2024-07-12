@@ -26,7 +26,7 @@ import java.io.IOException;
 /**
  * Created by rajeevkumarsingh on 02/08/17.
  */
-
+@Transactional
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     private static final String GITHUB_API_URL = "https://api.github.com";
