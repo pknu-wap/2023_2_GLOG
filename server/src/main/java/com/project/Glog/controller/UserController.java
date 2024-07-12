@@ -58,4 +58,14 @@ public class UserController {
         return new ResponseEntity<>(userMypageResponse, HttpStatus.OK);
     }
 
+    @DeleteMapping("/user")
+    public ResponseEntity<String> deleteUser(@CurrentUser UserPrincipal userPrincipal) {
+        try {
+            userService.deleteUser(userPrincipal);
+            return new ResponseEntity<>("사용자 탈퇴 성공", HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>("사용자 탈퇴 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }
