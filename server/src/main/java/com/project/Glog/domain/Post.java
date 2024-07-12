@@ -31,7 +31,6 @@ public class Post {
     private List<PostLike> postLikes;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Scrap> scraps;
-    @JoinColumn(name = "pr_post_id", unique = true)
     @OneToOne(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private PrPost prPost;
 
