@@ -9,12 +9,16 @@ import com.project.Glog.domain.User;
 import com.project.Glog.repository.BlogRepository;
 import com.project.Glog.repository.UserRepository;
 import com.project.Glog.util.AwsUtils;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,6 +29,13 @@ import java.io.IOException;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+    private static final String GITHUB_API_URL = "https://api.github.com";
+
+    @Value("${spring.security.oauth2.client.registration.github.client-id}")
+    private String CLIENT_ID;
+    @Value("${spring.security.oauth2.client.registration.github.client-secret}")
+    private String CLIENT_SECRET;
+
 
     @Autowired
     private UserRepository userRepository;
@@ -81,6 +92,36 @@ public class CustomUserDetailsService implements UserDetailsService {
         Blog blog = blogRepository.findByUserId(user.getId()).get();
 
         return UserMypageResponse.of(user, blog);
+    }
+
+    public void deleteUser(UserPrincipal userPrincipal){
+        User user = userRepository.findById(userPrincipal.getId()).get();
+        unlinkOAuth(user);
+        userRepository.deleteById(user.getId());
+    }
+
+    public Boolean unlinkOAuth(User user){
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String deleteUrl = GITHUB_API_URL + "/applications/" + CLIENT_ID + "/grant";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBasicAuth(CLIENT_ID, CLIENT_SECRET);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("access_token", user.getGithubToken());
+
+        HttpEntity<String> entity = new HttpEntity<>(requestBody.toString(), headers);
+
+        ResponseEntity<Object> response = restTemplate.exchange(
+                deleteUrl,
+                HttpMethod.DELETE,
+                entity,
+                Object.class
+        );
+        return response.getStatusCode().is2xxSuccessful();
     }
 
 }
