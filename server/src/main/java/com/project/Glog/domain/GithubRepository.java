@@ -35,7 +35,7 @@ public class GithubRepository {
     @NotNull
     private Boolean isCategoryRegi;
 
-    @OneToMany(mappedBy = "githubRepository", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PrPost> prPosts;
+    @OneToOne(mappedBy = "githubRepository", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PrPost prPost;
 
 }
