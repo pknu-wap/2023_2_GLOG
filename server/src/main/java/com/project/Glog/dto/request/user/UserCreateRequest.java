@@ -1,5 +1,6 @@
 package com.project.Glog.dto.request.user;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,10 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserCreateRequest {
-    @NotNull
+    @NotBlank(message = "url을 설정해주세요")
     private String blogUrl;
-    @NotNull
+    @NotBlank(message = "블로그 이름을 설정해주세요")
     private String blogName;
-    @NotNull
+    @NotBlank(message = "닉네임을 설정해주세요")
     private String nickname;
 }

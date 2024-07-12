@@ -26,6 +26,7 @@ import com.project.Glog.util.AwsUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,9 +38,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @AllArgsConstructor
 @Service
 public class PostService {
@@ -170,19 +173,21 @@ public class PostService {
     public Cookie addViewCountByCookie(HttpServletRequest request, Long postId) {
         Cookie[] cookies = request.getCookies();
         Cookie oldCookie = this.findCookie(cookies, VIEW_COOKIE_NAME);
+        log.debug(Arrays.toString(cookies));
+        log.debug(String.valueOf(oldCookie));
 
         if (oldCookie != null) {
             if (!oldCookie.getValue().contains("[" + postId + "]")) {
                 oldCookie.setValue(oldCookie.getValue() + "[" + postId + "]");
                 oldCookie.setPath("/");
-//                addViewCount(postId);
+                addViewCount(postId);
             }
             return oldCookie;
         }
 
         Cookie newCookie = new Cookie(VIEW_COOKIE_NAME, "[" + postId + "]");
+        log.debug(String.valueOf(newCookie));
         newCookie.setPath("/");
-        newCookie.setMaxAge(60 * 60 * 24);
         newCookie.setSecure(true);
         addViewCount(postId);
         return newCookie;

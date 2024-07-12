@@ -9,6 +9,7 @@ import com.project.Glog.repository.BlogRepository;
 import com.project.Glog.security.CurrentUser;
 import com.project.Glog.security.UserPrincipal;
 import com.project.Glog.service.BlogService;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class BlogController {
 
     @PostMapping("/change/blog/name")
     public ResponseEntity<MyPageResponse> changeBlogName(@CurrentUser UserPrincipal userPrincipal,
-                                                         @RequestParam String newBlogName){
+                                                         @RequestParam @NotBlank String newBlogName){
 
         MyPageResponse myPageResponse = blogService.changeBlogName(userPrincipal.getId(), newBlogName);
 

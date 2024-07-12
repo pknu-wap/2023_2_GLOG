@@ -14,6 +14,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+@Slf4j
 @AllArgsConstructor
 @RestController
 public class PostController {
@@ -91,6 +93,7 @@ public class PostController {
         try {
             Cookie cookie = postService.addViewCountByCookie(httpServletRequest, postId);
             httpServletResponse.addCookie(cookie);
+            log.debug(String.valueOf(httpServletResponse));
             PostReadResponse postReadResponse = postService.readPost(userPrincipal, postId);
             return new ResponseEntity<>(postReadResponse, HttpStatus.OK);
         } catch (Exception e) {
