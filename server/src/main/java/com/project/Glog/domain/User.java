@@ -90,7 +90,8 @@ public class User {
     private List<Temporary> temporaries;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch =FetchType.LAZY)
     private List<Alarm> alarms;
-
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private GithubRepository githubRepository;
 
     public void updateInfo(UserInfoChangeRequest userInfoChangeRequest) {
         this.nickname = userInfoChangeRequest.getName();

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -32,5 +34,8 @@ public class GithubRepository {
 
     @NotNull
     private Boolean isCategoryRegi;
+
+    @OneToMany(mappedBy = "githubRepository", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PrPost> prPosts;
 
 }

@@ -32,6 +32,6 @@ public class PrPost {
     @Column(length = 50000)
     private String prBody;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private GithubRepository githubRepository;
 }
