@@ -189,7 +189,6 @@ public class PostService {
         Cookie newCookie = new Cookie(VIEW_COOKIE_NAME, "[" + postId + "]");
         log.debug("내가 만든 쿠키: {}", newCookie);
         newCookie.setPath("/");
-        newCookie.setSecure(true);
         addViewCount(postId);
         return newCookie;
     }
