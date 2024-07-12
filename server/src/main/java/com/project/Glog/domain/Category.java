@@ -31,4 +31,10 @@ public class Category {
     private Boolean isPrcategory;
 
     private String reopsitoryUrl;
+
+    @OneToOne(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private GithubRepository githubRepository;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PrPost> prPosts;
 }
