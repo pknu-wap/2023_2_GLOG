@@ -173,8 +173,9 @@ public class PostService {
     public Cookie addViewCountByCookie(HttpServletRequest request, Long postId) {
         Cookie[] cookies = request.getCookies();
         Cookie oldCookie = this.findCookie(cookies, VIEW_COOKIE_NAME);
-        log.debug(Arrays.toString(cookies));
-        log.debug(String.valueOf(oldCookie));
+
+        log.debug("쿠키 리스트: {}",Arrays.toString(cookies));
+        log.debug("포스트 쿠키: {}", oldCookie);
 
         if (oldCookie != null) {
             if (!oldCookie.getValue().contains("[" + postId + "]")) {
@@ -186,7 +187,7 @@ public class PostService {
         }
 
         Cookie newCookie = new Cookie(VIEW_COOKIE_NAME, "[" + postId + "]");
-        log.debug(String.valueOf(newCookie));
+        log.debug("내가 만든 쿠키: {}", newCookie);
         newCookie.setPath("/");
         newCookie.setSecure(true);
         addViewCount(postId);

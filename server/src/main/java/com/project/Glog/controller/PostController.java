@@ -93,7 +93,7 @@ public class PostController {
         try {
             Cookie cookie = postService.addViewCountByCookie(httpServletRequest, postId);
             httpServletResponse.addCookie(cookie);
-            log.debug(String.valueOf(httpServletResponse));
+            log.debug("리스폰스 : {}" ,httpServletResponse);
             PostReadResponse postReadResponse = postService.readPost(userPrincipal, postId);
             return new ResponseEntity<>(postReadResponse, HttpStatus.OK);
         } catch (Exception e) {
