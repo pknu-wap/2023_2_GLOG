@@ -30,6 +30,9 @@ public class Blog {
     @OneToOne(mappedBy = "blog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Guestbook guestBook;
 
+    @OneToOne(mappedBy = "blog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Visit visit;
+
     @NotNull
     private String blogName;
 
