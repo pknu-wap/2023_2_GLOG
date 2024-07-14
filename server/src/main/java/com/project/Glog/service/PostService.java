@@ -83,7 +83,7 @@ public class PostService {
             postRepository.save(post);
         }
         //image
-        if (!multipartFile.isEmpty())
+        if (multipartFile!=null)
             post.setThumbnail(awsUtils.upload(multipartFile, "thumbnail").getPath());
 
         //hashtags
