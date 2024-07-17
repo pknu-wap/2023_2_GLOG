@@ -14,7 +14,7 @@ export const TopButtonStyle = styled(Stack)(() => ({
 
 export const TagContainer = styled(Stack)(() => ({
   width: '100%',
-  overflow: 'scroll',
+  overflow: 'overlay',
   gap: '4px',
   color: 'white',
   flexDirection: 'row',

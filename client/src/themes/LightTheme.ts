@@ -18,9 +18,10 @@ export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#e4ba5a',
-      light: 'rgba(228,186,90,0.6)',
-      lighter: 'rgba(228,186,90,0.2)',
+      main: '#F94144',
+      light: 'rgba(249,65,68,0.6)',
+      lighter: 'rgba(249,65,68,0.2)',
+      contrastText: '#fff',
     },
     secondary: {
       main: 'rgb(240, 240, 240)',

@@ -45,7 +45,7 @@ function page({ params }: { params: { categoryId: string } }) {
           <Stack fontSize="24px" marginBottom="8px">
             작성하지 않은 PR
           </Stack>
-          <Stack p={2} direction="row" spacing={4} overflow={'scroll'}>
+          <Stack p={2} direction="row" spacing={4} overflow={'overlay'}>
             {unPosted?.prUnPostedDtos?.prUnPostedDtos?.map((unPost) => {
               return (
                 <PageLink key={unPost.prId} href={`/write/pr/${unPost.prId}`}>

@@ -2,31 +2,30 @@
 
 import { ModalType } from '@/types/common';
 import { Menu, MenuItem, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PageLink from '../PageLink/PageLink';
 import FriendModal from '../Layout/HeaderFriendModal/FriendModal';
 import { enqueueSnackbar } from 'notistack';
+import useGetLoginStatus from '@/hooks/useGetLoginStatus';
 
 function SettingMenu({ open, onClose, anchorEl }: ModalType & { anchorEl: null | HTMLElement }) {
   const [friendOpen, setFriendOpen] = useState<boolean>(false);
-  const [token, setToken] = useState<string | null>('');
   const theme = useTheme();
-
-  useEffect(() => {
-    setToken(localStorage.getItem('token'));
-  }, []);
+  const { isLogin } = useGetLoginStatus();
 
   return (
     <Menu anchorEl={anchorEl} open={open} onClose={onClose}>
-      <MenuItem>
-        <PageLink
-          href="/mypage"
-          onClick={() => {
-            onClose();
-          }}>
-          마이페이지
-        </PageLink>
-      </MenuItem>
+      {isLogin && (
+        <MenuItem>
+          <PageLink
+            href="/mypage"
+            onClick={() => {
+              onClose();
+            }}>
+            마이페이지
+          </PageLink>
+        </MenuItem>
+      )}
       <MenuItem
         sx={{ color: theme.palette.oppositeColor.main }}
         onClick={() => setFriendOpen(true)}>
@@ -41,7 +40,7 @@ function SettingMenu({ open, onClose, anchorEl }: ModalType & { anchorEl: null |
           스크랩
         </PageLink>
       </MenuItem> */}
-      {token && (
+      {isLogin && (
         <PageLink
           href="/login"
           onClick={() => {
@@ -54,7 +53,7 @@ function SettingMenu({ open, onClose, anchorEl }: ModalType & { anchorEl: null |
           <MenuItem>Logout</MenuItem>
         </PageLink>
       )}
-      {!token && (
+      {!isLogin && (
         <MenuItem>
           <PageLink
             href="/login"

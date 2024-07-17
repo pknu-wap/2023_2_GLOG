@@ -24,6 +24,7 @@ import { WriteModalType, WriteProps } from '@/util/useWriteProps';
 import { enqueueSnackbar } from 'notistack';
 import { useGetBlogUrlQuery } from '@/api/blog-api';
 import { IBlogUrl } from '@/types/dto';
+import { DEFAULT_IMAGE } from '@/constant/common';
 
 function SaveModal({
   open,
@@ -269,7 +270,11 @@ function SaveModal({
                 </IconButton>
               </NoImageContent>
             ) : (
-              <img src={imageSrc} alt="" style={{ width: '300px', height: '180px' }} />
+              <img
+                src={imageSrc ?? DEFAULT_IMAGE}
+                alt=""
+                style={{ width: '300px', height: '180px' }}
+              />
             )}
             <Stack>{writeProps?.title}</Stack>
           </Preview>
@@ -315,10 +320,10 @@ function SaveModal({
             modalType === 'create'
               ? postOnClick
               : modalType === 'update'
-              ? postUpdateOnClick
-              : modalType === 'template'
-              ? postTemplateOnClick
-              : postTemporaryOnClick,
+                ? postUpdateOnClick
+                : modalType === 'template'
+                  ? postTemplateOnClick
+                  : postTemporaryOnClick,
         }}
       />
     </Modal>

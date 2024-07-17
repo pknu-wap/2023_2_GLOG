@@ -19,6 +19,7 @@ export const generateMetadata = async ({
     title: data.title,
     description: data.content,
     openGraph: {
+      siteName: 'GLOG',
       title: data.title,
       description: data.content,
       images:

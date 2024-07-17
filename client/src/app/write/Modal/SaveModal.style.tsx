@@ -35,6 +35,6 @@ export const TagContent = styled(Stack)(() => ({
   width: '200px',
   height: '100px',
   gap: '4px',
-  overflow: 'scroll',
+  overflow: 'overlay',
   flexWrap: 'wrap',
 }));

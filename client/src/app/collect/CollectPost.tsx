@@ -14,6 +14,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import IconButton from '@/components/Button/IconButton';
 import Image from 'next/image';
 import { Stack } from '@mui/material';
+import { DEFAULT_IMAGE } from '@/constant/common';
 
 function CollectPost({ like }: { like: ICollectPost }) {
   const theme = useTheme();
@@ -38,7 +39,7 @@ function CollectPost({ like }: { like: ICollectPost }) {
           {like.viewsCount}
         </PostPopular>
         <Stack>
-          <Image alt="썸네일" fill src={like.thumbnail ?? ''} />
+          <Image alt="썸네일" fill src={like.thumbnail ?? DEFAULT_IMAGE} />
         </Stack>
         {like?.isPrivate && (
           <CostomizeButton>

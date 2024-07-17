@@ -26,7 +26,7 @@ export const useGetCollectDataQuery = (params: ICollect) => {
   return { data, isLoading, error };
 };
 
-const GetColletSearchApi = async (params: ISearch) => {
+const getColletSearchApi = async (params: ISearch) => {
   const { data } = await defaultInstance.get(`/search`, { params });
 
   return data;
@@ -35,7 +35,7 @@ const GetColletSearchApi = async (params: ISearch) => {
 export const useGetCollectSearchQuery = (params: ISearch) => {
   const { isLoading, error, data } = useQuery(
     [`search`, params],
-    () => GetColletSearchApi(params),
+    () => getColletSearchApi(params),
     {
       enabled: !!params.value,
     },

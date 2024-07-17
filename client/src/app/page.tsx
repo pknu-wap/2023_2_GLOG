@@ -1,7 +1,3 @@
-import { redirect } from 'next/navigation';
-
-function Collect() {
-  redirect('/i/flow/login');
-}
+function Collect() {}
 
 export default Collect;

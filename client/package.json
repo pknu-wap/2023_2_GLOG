@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "lint": "next lint"
+    "lint": "next lint",
+    "swagger": "swagger-typescript-api -p https://port-0-glog-ly8kvahp40d24095.sel5.cloudtype.app/v3/api-docs -r -o ./src/types --modular -d --extract-request-body --extract-response-body --extract-response-error --axios"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -16,7 +17,7 @@
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.8",
     "@svgr/webpack": "^8.1.0",
-    "@tanstack/react-query": "^4.35.0",
+    "@tanstack/react-query": "^4.36.1",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@uiw/react-md-editor": "^3.23.6",
@@ -35,6 +36,7 @@
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "sharp": "^0.33.0",
+    "swagger-typescript-api": "^13.0.12",
     "typescript": "5.2.2"
   },
   "devDependencies": {

@@ -8,8 +8,11 @@ const getMypageApi = async () => {
   return data;
 };
 
-export const useGetMypageQuery = () => {
-  const { isLoading, error, data } = useQuery([`mypage`], () => getMypageApi());
+export const useGetMypageQuery = ({ isLogin }: { isLogin: boolean }) => {
+  const { isLoading, error, data } = useQuery([`mypage`, isLogin], () => getMypageApi(), {
+    enabled: isLogin,
+  });
+
   return { data, isLoading, error };
 };
 

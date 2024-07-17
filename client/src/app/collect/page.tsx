@@ -14,7 +14,6 @@ function Collect() {
   const [isSearch] = useIsSearchSSR();
   const [searchText, setSearchText] = useState<string>('');
   const [searchType, setSearchType] = useState<'user' | 'title' | 'hashtag' | 'content'>('user');
-
   const { data } = useGetCollectSearchQuery({ type: searchType, value: searchText });
 
   return (

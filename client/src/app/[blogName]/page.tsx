@@ -53,7 +53,7 @@ const Home = ({ params }: { params: { blogName: string } }) => {
               width="100%"
               margin="auto"
               minHeight="80vh"
-              overflow={'scroll'}>
+              overflow={'overlay'}>
               <MDEditor.Markdown source={readMe?.content} />
             </Stack>
           </Stack>

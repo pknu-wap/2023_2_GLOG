@@ -8,6 +8,7 @@ import { DeleteGuestbookApi, PutGuestbookApi } from '@/api/guestbook-api';
 import { Dialog } from '@/components/Dialog/Dialog';
 import Modal from '../Modal/Modal';
 import { ModalTitle, ModalContent } from '../Modal/Modal.style';
+import { DEFAULT_IMAGE } from '@/constant/common';
 
 function Comment({
   nickname,
@@ -57,8 +58,13 @@ function Comment({
   };
 
   return (
-    <Stack spacing={3} width="100%" alignItems={who === 'me' || who === 'owner(me)' ? 'flex-end' : 'flex-start'}>
-      <Stack flexDirection={who === 'me' || who === 'owner(me)' ? "row-reverse" : "row"} alignItems="center">
+    <Stack
+      spacing={3}
+      width="100%"
+      alignItems={who === 'me' || who === 'owner(me)' ? 'flex-end' : 'flex-start'}>
+      <Stack
+        flexDirection={who === 'me' || who === 'owner(me)' ? 'row-reverse' : 'row'}
+        alignItems="center">
         {/*<Image width={30} height={30} src={profileImage} alt="" />*/}
         <img
           style={{
@@ -67,21 +73,21 @@ function Comment({
             borderRadius: '50%',
             cursor: 'pointer',
           }}
-          src={profileImage}
+          src={profileImage ?? DEFAULT_IMAGE}
           alt="profileImage"
-              />
-        <Stack fontSize="16px" fontWeight="bold" margin='0 5px'>
+        />
+        <Stack fontSize="16px" fontWeight="bold" margin="0 5px">
           {nickname}
         </Stack>
 
         {areuOwner ? (
           who === 'owner(me)' ? (
-            <Stack alignItems='center' flexDirection="row-reverse" margin='0 5px'>
+            <Stack alignItems="center" flexDirection="row-reverse" margin="0 5px">
               <StarRateIcon></StarRateIcon>
               <Stack flexDirection="row">
                 <Button onClick={() => setPutMessageOpen(true)}>수정</Button>
                 <Button
-                  color='error'
+                  color="error"
                   onClick={() => {
                     setDeleteConFirmOpen(true);
                   }}>
@@ -92,7 +98,7 @@ function Comment({
           ) : (
             <Stack flexDirection="row">
               <Button
-                color='error'
+                color="error"
                 onClick={() => {
                   setDeleteConFirmOpen(true);
                 }}>
@@ -100,27 +106,25 @@ function Comment({
               </Button>
             </Stack>
           )
-        ) : (
-          who === 'owner' ? (
-            <Stack alignItems='center' flexDirection="row" margin='0 10px'>
-              <StarRateIcon></StarRateIcon>
-            </Stack>
-          ) : who === 'me' ? (
+        ) : who === 'owner' ? (
+          <Stack alignItems="center" flexDirection="row" margin="0 10px">
+            <StarRateIcon></StarRateIcon>
+          </Stack>
+        ) : who === 'me' ? (
+          <Stack flexDirection="row">
             <Stack flexDirection="row">
-              <Stack flexDirection="row">
-                <Button onClick={() => setPutMessageOpen(true)}>수정</Button>
-                <Button
-                  color='error'
-                  onClick={() => {
-                    setDeleteConFirmOpen(true);
-                  }}>
-                  삭제
-                </Button>
-              </Stack>
+              <Button onClick={() => setPutMessageOpen(true)}>수정</Button>
+              <Button
+                color="error"
+                onClick={() => {
+                  setDeleteConFirmOpen(true);
+                }}>
+                삭제
+              </Button>
             </Stack>
-          ) : (
-            <></>
-          )
+          </Stack>
+        ) : (
+          <></>
         )}
       </Stack>
       <CommentTime who={who} message={message} createdAt={createdAt} />

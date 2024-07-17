@@ -42,12 +42,10 @@ const Page = () => {
 
   useEffect(() => {
     const getTokenValue = params.get('token');
-    const error = params.get('error');
 
     if (getTokenValue) {
       localStorage.setItem('token', getTokenValue);
     } else {
-      console.log(error);
       enqueueSnackbar({ message: '로그인에 실패하였습니다.', variant: 'error' });
     }
   }, [params]);

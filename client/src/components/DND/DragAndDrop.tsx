@@ -14,6 +14,7 @@ import PageLink from '../PageLink/PageLink';
 import Github from '../Github/Github';
 import Button from '../Button/Button';
 import CreateCategoryModal from './CreateCategoryModal';
+import { DEFAULT_IMAGE } from '@/constant/common';
 
 type Footprint = {
   categoryId: number;
@@ -200,7 +201,7 @@ function DragAndDrop({ rightContainer, footprintList, blogName, isMe }: DragAndD
                                             width="fit-content"
                                             gap={2}>
                                             <Image
-                                              src={FootPrint}
+                                              src={FootPrint ?? DEFAULT_IMAGE}
                                               alt="footPrint"
                                               width="15"
                                               height="15"

@@ -18,6 +18,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { DeleteReplyApi, PatchReplyLikeApi, putReplyApi } from '@/api/reply-api';
 import { Dialog } from '@/components/Dialog/Dialog';
 import { enqueueSnackbar } from 'notistack';
+import { DEFAULT_IMAGE } from '@/constant/common';
 
 export const ThumbnailArea = styled(Stack)({
   width: '100%',
@@ -109,8 +110,6 @@ function RepliesComponent({
   isLiked: boolean;
   who: string;
 }) {
-  console.log(who);
-
   const theme = useTheme();
   const queryClient = useQueryClient();
   const [putReplyOpen, setPutReplyOpen] = useState<boolean>(false);
@@ -219,7 +218,7 @@ function RepliesComponent({
                 height: '35px',
                 borderRadius: '50%',
               }}
-              src={profileImage}
+              src={profileImage ?? DEFAULT_IMAGE}
               alt="profileImage"
             />
           </Button>
@@ -297,7 +296,7 @@ function RepliesComponent({
                     height: '100px',
                     borderRadius: '50%',
                   }}
-                  src={introduce?.imageUrl}
+                  src={introduce?.imageUrl ?? DEFAULT_IMAGE}
                   alt="profileImage"
                 />
                 <Stack>
@@ -364,7 +363,7 @@ function RepliesComponent({
                 width="500px"
                 borderLeft={`1px solid ${theme.palette.primary.main}`}
                 padding={'0px 0px 0px 12px'}
-                sx={{ overflowY: 'scroll', wordBreak: 'break-all' }}
+                sx={{ overflowY: 'overlay', wordBreak: 'break-all' }}
                 height="fit-content"
                 maxHeight="200px">
                 {introduce?.introduction}

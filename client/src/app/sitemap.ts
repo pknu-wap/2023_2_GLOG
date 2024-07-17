@@ -1,35 +1,91 @@
-// import { ICollectContent } from '@/types/dto';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MetadataRoute } from 'next';
 
-export const getData = async (id: number) => {
-  const res = await fetch(
-    `http://glogglogglog-env.eba-fuksumx7.ap-northeast-2.elasticbeanstalk.com/post/previews/likes?page=${id}`,
-  );
-  return res.json();
+export const getLikePosts = () => {
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/previews/likes?page=1`)
+    .then((res: any) => {
+      if (!res.ok) {
+        return Promise.reject();
+      }
+      return res.json();
+    })
+    .catch(() => {
+      return [];
+    });
+};
+export const getViewPosts = () => {
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/previews/views?page=1`)
+    .then((res: any) => {
+      if (!res.ok) {
+        return Promise.reject();
+      }
+      return res.json();
+    })
+    .catch(() => {
+      return [];
+    });
+};
+export const getRecentPosts = () => {
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/previews/recent?page=1`)
+    .then((res: any) => {
+      if (!res.ok) {
+        return Promise.reject();
+      }
+      return res.json();
+    })
+    .catch(() => {
+      return [];
+    });
 };
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //   const data: any = getData(0);
-  //   const allThePostData: ICollectContent['postPreviewDtos'] = data?.postPreviewDtos;
+type PostType = {
+  postPreviewDtos: {
+    blogUrl: string;
+    title: string;
+    createdAt: string;
+    categoryId: string;
+    postId: string;
+  }[];
+};
+const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
+  const likeProducts: PostType = await getLikePosts();
+  const viewProducts: PostType = await getViewPosts();
+  const recentProducts: PostType = await getRecentPosts();
 
-  //   const sitemapUrls = allThePostData?.map((post) => {
-  //     return {
-  //       url: `http://15.164.221.35:3000/${post.blogUrl}/home/${post.categoryId}/${post.postId}`,
-  //     };
-  //   });
+  const blogPosts = likeProducts.postPreviewDtos.map((post) => ({
+    url: `${process.env.NEXT_PUBLIC_API_URL}/${post.blogUrl}/home/${post.categoryId}/${post.postId}`,
+    lastModified: post.createdAt,
+    changeFrequency: 'always' as const,
+    priority: 1,
+  }));
 
-  const staticUrls = [
+  blogPosts.push(
+    ...viewProducts.postPreviewDtos.map((post) => ({
+      url: `${process.env.NEXT_PUBLIC_API_URL}/${post.blogUrl}/home/${post.categoryId}/${post.postId}`,
+      lastModified: post.createdAt,
+      changeFrequency: 'always' as const,
+      priority: 1,
+    })),
+  );
+
+  blogPosts.push(
+    ...recentProducts.postPreviewDtos.map((post) => ({
+      url: `${process.env.NEXT_PUBLIC_API_URL}/${post.blogUrl}/home/${post.categoryId}/${post.postId}`,
+      lastModified: post.createdAt,
+      changeFrequency: 'always' as const,
+      priority: 1,
+    })),
+  );
+
+  return [
     {
-      url: 'http://15.164.221.35:3000',
+      url: process.env.NEXT_PUBLIC_API_URL!,
+      lastModified: new Date(),
+      changeFrequency: 'always',
+      priority: 0.5,
     },
-    {
-      url: 'http://15.164.221.35:3000/jkjk',
-    },
-    {
-      url: 'http://15.164.221.35:3000/jkjk/home/5/45',
-    },
+    ...blogPosts,
   ];
+};
 
-  return [...staticUrls];
-}
+export default Sitemap;

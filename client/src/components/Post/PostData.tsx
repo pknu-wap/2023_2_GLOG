@@ -49,6 +49,7 @@ import { enqueueSnackbar } from 'notistack';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { postVisitApi } from '@/api/mypage-api';
 import { useUserThemeSSR } from '../../../hooks/useRecoilSSR';
+import { DEFAULT_IMAGE } from '@/constant/common';
 
 const PostData = ({
   params,
@@ -181,12 +182,7 @@ const PostData = ({
   return (
     <Stack>
       <ThumbnailArea>
-        <ImageContainer
-          imageSrc={
-            postData?.thumbnail ??
-            'https://s3.console.aws.amazon.com/s3/object/elasticbeanstalk-us-east-1-064991853848?region=us-east-1&prefix=thumbnail/road_sunset_horizon_118582_1920x1080.jpg'
-          }
-        />
+        <ImageContainer imageSrc={postData?.thumbnail ?? DEFAULT_IMAGE} />
         <BlackContainer paddingTop="64px">
           <CenterContent bgcolor="transparent">
             <Stack gap={8} width="100%" height="100%" direction="row">
@@ -216,7 +212,7 @@ const PostData = ({
                         height: '35px',
                         borderRadius: '50%',
                       }}
-                      src={post?.author?.profileImage}
+                      src={post?.author?.profileImage ?? DEFAULT_IMAGE}
                       alt="profileImage"
                     />
                   </Button>
@@ -348,7 +344,7 @@ const PostData = ({
           <Stack spacing={10} padding={'40px 80px'}>
             <Stack direction="row" width="500px" spacing={10} justifyContent="space-between">
               <Stack direction="row" alignItems="center" spacing={4}>
-                <Image width={30} height={30} src={introduce?.imageUrl ?? ''} alt="" />
+                <Image width={30} height={30} src={introduce?.imageUrl ?? DEFAULT_IMAGE} alt="" />
                 <Stack>
                   <Stack padding="8px" fontSize="25px">
                     {introduce?.nickname}
@@ -413,7 +409,7 @@ const PostData = ({
                 width="500px"
                 borderLeft={`1px solid ${theme.palette.primary.main}`}
                 padding={'0px 0px 0px 12px'}
-                sx={{ overflowY: 'scroll', wordBreak: 'break-all' }}
+                sx={{ overflowY: 'overlay', wordBreak: 'break-all' }}
                 height="fit-content"
                 maxHeight="200px">
                 {introduce?.introduction}

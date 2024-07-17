@@ -16,6 +16,8 @@ import { IAlarm, IUserDetail } from '@/types/dto';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useGetAlarmsQuery } from '@/api/blog-api';
 import CommentIcon from '@mui/icons-material/Comment';
+import { DEFAULT_IMAGE } from '@/constant/common';
+import useGetLoginStatus from '@/hooks/useGetLoginStatus';
 
 export default function Header() {
   const [userTheme, setUserTheme] = useUserThemeSSR();
@@ -28,6 +30,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const { data: alarmData } = useGetAlarmsQuery();
   const [alarm, setAlarm] = useState<IAlarm>();
+  const { isLogin } = useGetLoginStatus();
 
   useEffect(() => {
     setAlarm(alarmData);
@@ -49,7 +52,7 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  const menuopen = Boolean(anchorEl);
+  const menuOpen = Boolean(anchorEl);
 
   useEffect(() => {
     setUserDetail(userDetailData);
@@ -71,10 +74,13 @@ export default function Header() {
         width="fit-content"
         fontSize="32px"
         fontWeight={700}
-        color={pathname.includes('/home') ? 'primary.main' : 'white'}
+        // color={pathname.includes('/home') ? 'primary.main' : 'white'}
         zIndex={20005}>
-        <PageLink href="/collect" color="#ffffff">
-          GLOG
+        <PageLink
+          href="/collect"
+          color="#ffffff"
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <Image width={100} height={51} src="/assets/white-logo.png" alt="GLOG" />
         </PageLink>
       </Stack>
       <Stack direction="row" alignItems="center" gap={2}>
@@ -112,14 +118,19 @@ export default function Header() {
           borderRadius="20px"
           overflow="hidden"
           sx={{ cursor: 'pointer', backgroundColor: '#ffffff' }}>
-          <PageLink href={`/${userDetail?.blogUrl}` ?? ''}>
-            <Image width={40} height={40} alt="profile Image" src={userDetail?.thumbnail ?? ''} />
+          <PageLink href={`/${!isLogin ? 'login' : userDetail?.blogUrl}` ?? ''}>
+            <Image
+              width={40}
+              height={40}
+              alt="profile Image"
+              src={userDetail?.thumbnail ?? DEFAULT_IMAGE}
+            />
           </PageLink>
         </Stack>
         <IconButton sx={{ color: '#ffffff' }} size="medium" onClick={handleClick}>
           <MenuIcon fontSize="large" />
         </IconButton>
-        <SettingMenu open={menuopen} onClose={handleClose} anchorEl={anchorEl} />
+        <SettingMenu open={menuOpen} onClose={handleClose} anchorEl={anchorEl} />
       </Stack>
       <Menu
         anchorEl={alarmAnchorEl}
@@ -130,7 +141,7 @@ export default function Header() {
         }}>
         {alarm?.alarmDtos?.map((alarm, i) => {
           return (
-            <MenuItem sx={{ padding: '4px' }} key={i}>
+            <MenuItem sx={{ padding: '4px', width: '100%' }} key={i}>
               <Stack
                 bgcolor={alarm.checked ? 'primary.light' : 'transparent'}
                 py={4}

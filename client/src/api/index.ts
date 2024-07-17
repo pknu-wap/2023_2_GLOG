@@ -33,6 +33,5 @@ const unAxiosApi = (url: string, data?: any) => {
   return instance;
 };
 
-export const defaultInstance = axiosApi('http://3.35.24.11:8080');
-
-export const unAxiosDefaultInstance = unAxiosApi('http://3.35.24.11:8080');
+export const defaultInstance = axiosApi(process.env.NEXT_PUBLIC_API_URL!);
+export const unAxiosDefaultInstance = unAxiosApi(process.env.NEXT_PUBLIC_API_URL!);

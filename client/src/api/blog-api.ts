@@ -66,7 +66,11 @@ export const getIsNewBlogApi = async (token?: string | null) => {
 };
 
 export const useGetIsNewBlogQuery = (token?: string | null) => {
-  const { isLoading, error, data } = useQuery([`isNewBlog`], () => getIsNewBlogApi(token), {});
+  const { isLoading, error, data } = useQuery(
+    [`isNewBlog`, token],
+    () => getIsNewBlogApi(token),
+    {},
+  );
   return { data, isLoading, error };
 };
 
