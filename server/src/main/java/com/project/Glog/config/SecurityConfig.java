@@ -114,6 +114,7 @@ public class SecurityConfig {
                         "/pr/posts/posted",
                         "/search/**",
                         "/blog/url",
+                        "/blogid",
                         "/category/**")
                 .permitAll()
                 .requestMatchers(HttpMethod.POST,

@@ -45,6 +45,7 @@ public class ReplyService  {
                     null,
                     post.getUser(),
                     post.getId(),
+                    post.getCategory().getId(),
                     ShortPostTitle + "에 "+ user.getNickname() + "님이 댓글을 추가했습니다.",
                     false,
                     AlarmType.reply,
