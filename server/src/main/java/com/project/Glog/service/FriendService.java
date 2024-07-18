@@ -185,6 +185,7 @@ public class FriendService {
                     null,
                     opponent,
                     null,
+                     null,
                      user.getNickname() + "님이 친구 요청을 보냈습니다.",
                     false,
                     AlarmType.friend,

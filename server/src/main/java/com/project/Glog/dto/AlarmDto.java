@@ -17,6 +17,7 @@ public class AlarmDto {
     private Boolean checked;
     private AlarmType type;
     private Long postId;
+    private Long categoryId;
     private LocalDateTime createdAt;
 
     public static AlarmDto of(Alarm alarm){
@@ -25,6 +26,7 @@ public class AlarmDto {
                 alarm.getChecked(),
                 alarm.getType(),
                 alarm.getPostId(),
+                alarm.getCategoryId(),
                 alarm.getCreatedAt());
     }
 }

@@ -22,6 +22,7 @@ public class Alarm {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     private Long postId;
+    private Long categoryId;
     private String message;
     private Boolean checked;
     @Enumerated(EnumType.STRING)
