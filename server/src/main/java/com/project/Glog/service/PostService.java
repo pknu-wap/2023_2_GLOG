@@ -116,7 +116,7 @@ public class PostService {
         post.update(req);
 
         //image
-        if (!multipartFile.isEmpty())
+        if (multipartFile!=null)
             post.setThumbnail(awsUtils.upload(multipartFile, "thumbnail").getPath());
 
         postRepository.save(post);
