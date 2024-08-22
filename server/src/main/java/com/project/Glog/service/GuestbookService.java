@@ -41,9 +41,14 @@ public class GuestbookService {
     }
 
     public GuestbookResponse read(UserPrincipal userPrincipal, Long blogId){
-        User user = userRepository.findById(userPrincipal.getId()).get();
         Guestbook guestbook = guestbookRepository.findByBlog_Id(blogId);
-
+        User user;
+        if(userPrincipal!=null) {
+            user = userRepository.findById(userPrincipal.getId()).get();
+        }
+        else{
+            user = userRepository.findUserByNickname("anonymous");
+        }
         GuestbookResponse guestbookResponse = GuestbookResponse.of(guestbook, user);
 
         return guestbookResponse;
