@@ -30,8 +30,13 @@ public class FriendService {
     public UserModalResponse makeUserModalResponse(UserPrincipal userPrincipal, Long personId) {
         User opponent = userRepository.findById(personId).get();
         UserModalResponse userModalResponse = UserModalResponse.of(opponent);
-        userModalResponse.setRelationship(findRelationship(userPrincipal, personId));
 
+        if(userPrincipal==null){
+            userModalResponse.setRelationship("other");
+        }
+        else{
+            userModalResponse.setRelationship(findRelationship(userPrincipal, personId));
+        }
         return userModalResponse;
     }
 
