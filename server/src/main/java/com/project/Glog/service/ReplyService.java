@@ -73,10 +73,6 @@ public class ReplyService  {
             imOwner = (authorId == userPrincipal.getId());
             currentUser = userRepository.findById(userPrincipal.getId()).get();
         }
-       
-
-
-
 
         PageRequest pageRequest = PageRequest.of(req.getPage(), 10, Sort.by(req.getOrder()).descending());
         List<Reply> replys = replyRepository.findRepliesByPost(post, pageRequest).getContent();
