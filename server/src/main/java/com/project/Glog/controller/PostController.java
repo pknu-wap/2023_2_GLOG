@@ -176,5 +176,10 @@ public class PostController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @GetMapping("/post/all")
+    public ResponseEntity<Post> getAllPosts(){
+        return null;
+    }
 }
 
