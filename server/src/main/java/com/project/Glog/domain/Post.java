@@ -46,6 +46,7 @@ public class Post {
     @NotNull
     private String title;
     @NotNull
+    @Column(length = 5000)
     private String content;
     private String thumbnail;
     @NotNull
